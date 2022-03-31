@@ -6,12 +6,12 @@ public class PlayerHealth : MonoBehaviour
     
     private float health = 0f;
     [SerializeField] private float maxHealth = 100f;
-    //[SerializeField] private Slider helathSlider;
+    [SerializeField] private Slider helathSlider;
 
     private void Start()
     {
         health = maxHealth;
-        //helathSlider.maxValue = maxHealth;
+        helathSlider.maxValue = maxHealth;
     }
 
     public void UpdateHealth(float mod){
@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
         else if (health<=0f){
             health = 0f;
             Debug.Log("Player Respawn");
-            //helathSlider.value = health;
+            helathSlider.value = health;
             PlayerDied();
          }
     }
@@ -30,11 +30,11 @@ public class PlayerHealth : MonoBehaviour
     private void PlayerDied(){
         //LevelManager.instance.gameOver();
         Destroy(gameObject);
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
-    // private void OnGUI() {
-    //     float t= Time.deltaTime / 1f;
-    //     helathSlider.value = Mathf.Lerp(helathSlider.value, health, t);
-    // }
+    private void OnGUI() {
+        float t= Time.deltaTime / 1f;
+        helathSlider.value = Mathf.Lerp(helathSlider.value, health, t);
+    }
 
 }
