@@ -37,4 +37,9 @@ public class PlayerHealth : MonoBehaviour
         helathSlider.value = Mathf.Lerp(helathSlider.value, health, t);
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "Enemy"){
+            UpdateHealth(-10);
+        }
+    }
 }
