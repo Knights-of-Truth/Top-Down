@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour{
                 enemyXPosition = Random.Range(-4, 4);
                 enemyYPosition = Random.Range(-4, 4);
                 EnemySpawnVector = new Vector3 (enemyXPosition, enemyYPosition, 0f);
-                GameObject Enemy= Instantiate(EnemyPrefab, playerPosition + EnemySpawnVector, Quaternion.identity);
+                // GameObject Enemy= Instantiate(EnemyPrefab, playerPosition + EnemySpawnVector, Quaternion.identity);
             }
         }
     }
