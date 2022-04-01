@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-public class PlayerAttack : MonoBehaviour
-{
+public class PlayerAttack : MonoBehaviour{
     [SerializeField] GameObject ArrowPrefab;
     [SerializeField] SpriteRenderer ArrowGFX;
     [SerializeField] Slider BowPowerSlider;
@@ -15,46 +12,37 @@ public class PlayerAttack : MonoBehaviour
     [Range(0, 10)]
     [SerializeField] float BowPower;
 
-
     [Range(0, 3)]
     [SerializeField] float MaxBowCharge;
-
     float BowCharge;
-
     bool CanFire = true;
 
-    private void Start() {
+    private void Start(){
         BowPowerSlider.value=0f;
         BowPowerSlider.maxValue = MaxBowCharge;
-
-        
     }
-    private void FixedUpdate() {
+    private void Update() {
         if (Input.GetMouseButton(0) && CanFire){
             ChargeBow();
         }else if(Input.GetMouseButtonUp(0) && CanFire){
             FireBow();
         }
-        else
-        {
-            if (BowCharge >0f){
-                BowCharge -= 1f*Time.deltaTime;
+        else{
+            if (BowCharge > 0.1f){
+                BowCharge -= 1.5f * Time.deltaTime;
+                Debug.Log("bowcharge > 0");
             }
             else{
                 BowCharge = 0f;
                 CanFire = true;
-
             }
             BowPowerSlider.value = BowCharge;
-
         }
     }
     void ChargeBow(){
         ArrowGFX.enabled = true;
         BowCharge += Time.deltaTime;
-
         BowPowerSlider.value = BowCharge;
-
         if(BowCharge > MaxBowCharge){
             BowPowerSlider.value = MaxBowCharge;
         }
@@ -77,7 +65,5 @@ public class PlayerAttack : MonoBehaviour
 
        CanFire = false;
        ArrowGFX.enabled = false;
-
-        
     } 
 }

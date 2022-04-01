@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Utility {
-
     public static float AngleTowardsMouse(Vector3 pos){
         Vector3 mousePos = Input.mousePosition;
         mousePos.z= 5.23f;
@@ -15,7 +14,5 @@ public static class Utility {
 
         return angle;
     }
-
-
 }
 

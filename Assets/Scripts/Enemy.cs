@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Enemy : MonoBehaviour
-{
+public class Enemy : MonoBehaviour{
     [Header ("Movement")]
     public float speed = 3f;
     
@@ -17,21 +16,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float maxHealth;
     private float Health;
     private Transform target;
-    
 
-    void Start()
-    {
+    void Start(){
         Health = maxHealth;
     }
-    public void TakeDamage(float dmg) {
+    public void TakeDamage(float dmg){
         Health -= dmg;
         Debug.Log("Enemy Health: "+ Health);
-        
 
         if(Health <= 0){
             Destroy(gameObject);
-            }
         }
+    }
 
     void FixedUpdate(){
         if (target != null){
@@ -52,23 +48,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)    {
+    private void OnCollisionEnter2D(Collision2D other){
         if (other.gameObject.tag == "Player"){
             if(attackSpeed <= canAttack){
-                other.gameObject.GetComponent<PlayerHealth>().UpdateHealth(-attackDamage);
-                canAttack = 0f;
-            }
-            else{
-                canAttack += Time.deltaTime;
-            }
-        }
-}
-
-
-    private void OnCollisionStay2D(Collision2D other)    {
-        if (other.gameObject.tag == "Player"){
-            if(attackSpeed <= canAttack){
-                
                 other.gameObject.GetComponent<PlayerHealth>().UpdateHealth(-attackDamage);
                 canAttack = 0f;
             }
@@ -77,5 +59,15 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    
+    private void OnCollisionStay2D(Collision2D other){
+        if (other.gameObject.tag == "Player"){
+            if(attackSpeed <= canAttack){
+                other.gameObject.GetComponent<PlayerHealth>().UpdateHealth(-attackDamage);
+                canAttack = 0f;
+            }
+            else{
+                canAttack += Time.deltaTime;
+            }
+        }
+    }
 }
