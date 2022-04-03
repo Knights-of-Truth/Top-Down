@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BounceEnemy : MonoBehaviour
+public class BounceEnemy : Enemy
 {
-    public bool Breserk;
-    public Rigidbody2D rb;
-    public int speed;
     private Vector2 velo;
     // Start is called before the first frame update
     void Start()
     {
         speed = 5;
-        Breserk = false;
         velo = new Vector2(Random.Range(-1,1)*speed,Random.Range(-1,1)*speed);
     }
 

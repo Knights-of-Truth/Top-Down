@@ -8,17 +8,23 @@ public class Enemy : MonoBehaviour{
     public float speed = 3f;
     
     [Header ("Attack")]
-    [SerializeField] private float attackDamage = 10f;
-    [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] protected float attackDamage = 10f;
+    [SerializeField] protected float attackSpeed = 1f;
     private float canAttack;
+
+    [Header ("Parent")]
+    public bool Breserk;
+    public Rigidbody2D rb;
+    public CircleCollider2D cc;
+    public CircleCollider2D cc2;
 
     [Header ("Health")]
     [SerializeField] private float maxHealth;
     private float Health;
-    private Transform target;
 
     void Start(){
         Health = maxHealth;
+        Breserk = false;
     }
     public void TakeDamage(float dmg){
         Health -= dmg;
@@ -26,25 +32,6 @@ public class Enemy : MonoBehaviour{
 
         if(Health <= 0){
             Destroy(gameObject);
-        }
-    }
-
-    void FixedUpdate(){
-        if (target != null){
-            float step = speed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, target.position, step);
-        }           
-    }
-    
-    
-    void OnTriggerEnter2D (Collider2D other){
-        if (other.gameObject.tag == "Player"){
-            target = other.transform;
-        }
-    }
-    void OnTriggerExit2D (Collider2D other){
-        if (other.gameObject.tag == "Player"){
-            target = null;
         }
     }
 
